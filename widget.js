@@ -5,70 +5,85 @@
   style.innerHTML = `
     #kingston-chatbot-section {
       width: 100%;
-      padding: 70px 20px;
-      background: #050505;
+      padding: 80px 24px;
+      background:
+        linear-gradient(180deg, #030303 0%, #090909 55%, #030303 100%);
       color: white;
       font-family: inherit;
+      box-sizing: border-box;
     }
 
     #kingston-chatbot-wrap {
-      max-width: 1100px;
+      max-width: 1180px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 40px;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 56px;
       align-items: center;
     }
 
-    #kingston-chatbot-copy small {
-      color: #d4a24c;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    #kingston-chatbot-copy h2 {
-      font-size: 42px;
-      line-height: 1.1;
-      margin: 12px 0 18px;
-      color: white;
-    }
-
-    #kingston-chatbot-copy p {
-      color: #d8d8d8;
-      font-size: 16px;
-      line-height: 1.7;
+    #kingston-chatbot-copy {
       max-width: 470px;
     }
 
+    #kingston-chatbot-copy small {
+      display: block;
+      color: #d7a94f;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    #kingston-chatbot-copy h2 {
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: 1.04;
+      margin: 0 0 20px;
+      color: #fff;
+      letter-spacing: -0.04em;
+    }
+
+    #kingston-chatbot-copy p {
+      color: rgba(255,255,255,0.78);
+      font-size: 17px;
+      line-height: 1.75;
+      margin: 0;
+    }
+
     #kingston-chatbot {
-      background: rgba(16,16,16,0.96);
-      border: 1px solid rgba(212,162,76,0.45);
-      border-radius: 22px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+      width: 100%;
+      max-width: 620px;
+      background: rgba(8,8,8,0.92);
+      border: 1px solid rgba(215,169,79,0.42);
+      border-radius: 20px;
+      box-shadow: 0 26px 70px rgba(0,0,0,0.55);
       overflow: hidden;
-      min-height: 520px;
+      min-height: 440px;
       display: flex;
       flex-direction: column;
     }
 
     #kingston-chatbot-header {
-      padding: 22px;
-      background: linear-gradient(135deg, #151515, #050505);
-      border-bottom: 1px solid rgba(212,162,76,0.35);
+      padding: 22px 24px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.045), rgba(255,255,255,0.01));
+      border-bottom: 1px solid rgba(215,169,79,0.25);
     }
 
     #kingston-chatbot-header h3 {
       margin: 0;
-      font-size: 22px;
-      color: white;
+      font-size: 24px;
+      line-height: 1.15;
+      color: #fff;
+      letter-spacing: -0.02em;
     }
 
     #kingston-chatbot-header p {
       margin: 8px 0 0;
-      color: #cfcfcf;
+      color: rgba(255,255,255,0.7);
       font-size: 14px;
-      line-height: 1.5;
+      line-height: 1.45;
     }
 
     #kingston-chatbot-messages {
@@ -76,30 +91,33 @@
       padding: 22px;
       overflow-y: auto;
       background:
-        radial-gradient(circle at top right, rgba(212,162,76,0.08), transparent 35%),
-        #090909;
+        radial-gradient(circle at top right, rgba(215,169,79,0.09), transparent 32%),
+        #080808;
       font-size: 15px;
       line-height: 1.55;
     }
 
     .kingston-msg {
-      margin-bottom: 14px;
+      margin-bottom: 13px;
       padding: 13px 15px;
-      border-radius: 15px;
-      max-width: 88%;
+      border-radius: 14px;
+      max-width: 82%;
       white-space: pre-wrap;
+      font-size: 15px;
+      line-height: 1.55;
+      text-align: left;
     }
 
     .kingston-user {
-      background: #d4a24c;
-      color: #111;
+      background: #d7a94f;
+      color: #080808;
       margin-left: auto;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .kingston-bot {
-      background: #1f1f1f;
-      color: #f2f2f2;
+      background: rgba(255,255,255,0.075);
+      color: rgba(255,255,255,0.9);
       border: 1px solid rgba(255,255,255,0.08);
       margin-right: auto;
     }
@@ -107,48 +125,62 @@
     #kingston-chatbot-input-area {
       display: flex;
       gap: 10px;
-      padding: 16px;
-      background: #070707;
-      border-top: 1px solid rgba(212,162,76,0.25);
+      padding: 14px;
+      background: #060606;
+      border-top: 1px solid rgba(215,169,79,0.22);
     }
 
     #kingston-chatbot-input {
       flex: 1;
-      padding: 14px;
+      min-width: 0;
+      padding: 13px 14px;
       border-radius: 12px;
-      border: 1px solid rgba(212,162,76,0.35);
-      background: #141414;
+      border: 1px solid rgba(215,169,79,0.28);
+      background: rgba(255,255,255,0.055);
       color: white;
       outline: none;
       font-size: 15px;
+      line-height: 1.2;
+      box-sizing: border-box;
+    }
+
+    #kingston-chatbot-input::placeholder {
+      color: rgba(255,255,255,0.42);
     }
 
     #kingston-chatbot-send {
-      background: #d4a24c;
-      color: #111;
+      background: #d7a94f;
+      color: #080808;
       border: none;
       border-radius: 12px;
-      padding: 0 20px;
+      padding: 0 22px;
       cursor: pointer;
-      font-weight: 800;
+      font-weight: 900;
       font-size: 15px;
+      min-width: 82px;
     }
 
     #kingston-chatbot-send:hover {
-      background: #f0bd63;
+      background: #efc064;
     }
 
-    @media (max-width: 850px) {
-      #kingston-chatbot-wrap {
-        grid-template-columns: 1fr;
+    @media (max-width: 900px) {
+      #kingston-chatbot-section {
+        padding: 56px 18px;
       }
 
-      #kingston-chatbot-copy h2 {
-        font-size: 32px;
+      #kingston-chatbot-wrap {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      #kingston-chatbot-copy {
+        max-width: 100%;
       }
 
       #kingston-chatbot {
-        min-height: 500px;
+        max-width: 100%;
+        min-height: 430px;
       }
     }
   `;
@@ -161,11 +193,11 @@
     <div id="kingston-chatbot-wrap">
       <div id="kingston-chatbot-copy">
         <small>Kingston MP3 Assistant</small>
-        <h2>Ask questions about Kingston MP3</h2>
+        <h2>Ask about the project, the music, and the story.</h2>
         <p>
-          Local artists can use this assistant to learn about interviews,
-          music submissions, copyright basics, and how Kingston MP3 helps
-          Kingston-area talent get discovered.
+          Use the Kingston MP3 assistant to learn how the platform works,
+          what it offers local artists, and what information is currently
+          available about interviews, submissions, and copyright basics.
         </p>
       </div>
 
@@ -194,10 +226,10 @@
     document.querySelector(".entry-content") ||
     document.body;
 
-  const secondSection = target.querySelectorAll("section")[1];
+  const sections = target.querySelectorAll("section");
 
-  if (secondSection) {
-    secondSection.parentNode.insertBefore(section, secondSection);
+  if (sections[1]) {
+    sections[1].parentNode.insertBefore(section, sections[1]);
   } else {
     target.appendChild(section);
   }
@@ -227,21 +259,18 @@
     try {
       const response = await fetch(API_URL, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message })
       });
 
       const data = await response.json();
-      typingMsg.textContent = data.reply || "Sorry, I could not answer that.";
+      typingMsg.textContent = data.reply || "Sorry, I could not answer that yet.";
     } catch (error) {
       typingMsg.textContent = "Sorry, something went wrong. Please try again.";
     }
   }
 
   sendBtn.addEventListener("click", sendMessage);
-
   input.addEventListener("keydown", function (e) {
     if (e.key === "Enter") sendMessage();
   });
