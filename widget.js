@@ -3,134 +3,204 @@
 
   const style = document.createElement("style");
   style.innerHTML = `
-    #kingston-chatbot {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-      width: 360px;
-      height: 520px;
-      background: #111;
+    #kingston-chatbot-section {
+      width: 100%;
+      padding: 70px 20px;
+      background: #050505;
       color: white;
-      border: 2px solid #e11d2e;
-      border-radius: 18px;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.45);
-      font-family: Arial, sans-serif;
-      z-index: 999999;
+      font-family: inherit;
+    }
+
+    #kingston-chatbot-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    #kingston-chatbot-copy small {
+      color: #d4a24c;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    #kingston-chatbot-copy h2 {
+      font-size: 42px;
+      line-height: 1.1;
+      margin: 12px 0 18px;
+      color: white;
+    }
+
+    #kingston-chatbot-copy p {
+      color: #d8d8d8;
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 470px;
+    }
+
+    #kingston-chatbot {
+      background: rgba(16,16,16,0.96);
+      border: 1px solid rgba(212,162,76,0.45);
+      border-radius: 22px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+      overflow: hidden;
+      min-height: 520px;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
     }
 
     #kingston-chatbot-header {
-      background: #e11d2e;
-      padding: 14px 16px;
-      font-weight: bold;
-      font-size: 16px;
+      padding: 22px;
+      background: linear-gradient(135deg, #151515, #050505);
+      border-bottom: 1px solid rgba(212,162,76,0.35);
     }
 
-    #kingston-chatbot-subtitle {
-      font-size: 12px;
-      font-weight: normal;
-      opacity: 0.9;
-      margin-top: 3px;
+    #kingston-chatbot-header h3 {
+      margin: 0;
+      font-size: 22px;
+      color: white;
+    }
+
+    #kingston-chatbot-header p {
+      margin: 8px 0 0;
+      color: #cfcfcf;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     #kingston-chatbot-messages {
       flex: 1;
-      padding: 14px;
+      padding: 22px;
       overflow-y: auto;
-      background: #151515;
-      font-size: 14px;
-      line-height: 1.4;
+      background:
+        radial-gradient(circle at top right, rgba(212,162,76,0.08), transparent 35%),
+        #090909;
+      font-size: 15px;
+      line-height: 1.55;
     }
 
     .kingston-msg {
-      margin-bottom: 12px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      max-width: 90%;
+      margin-bottom: 14px;
+      padding: 13px 15px;
+      border-radius: 15px;
+      max-width: 88%;
       white-space: pre-wrap;
     }
 
     .kingston-user {
-      background: #e11d2e;
+      background: #d4a24c;
+      color: #111;
       margin-left: auto;
-      color: white;
+      font-weight: 600;
     }
 
     .kingston-bot {
-      background: #2a2a2a;
+      background: #1f1f1f;
+      color: #f2f2f2;
+      border: 1px solid rgba(255,255,255,0.08);
       margin-right: auto;
-      color: white;
     }
 
     #kingston-chatbot-input-area {
       display: flex;
-      border-top: 1px solid #333;
-      background: #111;
-      padding: 10px;
-      gap: 8px;
+      gap: 10px;
+      padding: 16px;
+      background: #070707;
+      border-top: 1px solid rgba(212,162,76,0.25);
     }
 
     #kingston-chatbot-input {
       flex: 1;
-      padding: 11px;
-      border-radius: 10px;
-      border: 1px solid #444;
-      background: #1f1f1f;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(212,162,76,0.35);
+      background: #141414;
       color: white;
       outline: none;
-      font-size: 14px;
+      font-size: 15px;
     }
 
     #kingston-chatbot-send {
-      background: #e11d2e;
-      color: white;
+      background: #d4a24c;
+      color: #111;
       border: none;
-      border-radius: 10px;
-      padding: 0 15px;
+      border-radius: 12px;
+      padding: 0 20px;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 800;
+      font-size: 15px;
     }
 
     #kingston-chatbot-send:hover {
-      background: #ff2638;
+      background: #f0bd63;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 850px) {
+      #kingston-chatbot-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      #kingston-chatbot-copy h2 {
+        font-size: 32px;
+      }
+
       #kingston-chatbot {
-        right: 10px;
-        left: 10px;
-        bottom: 10px;
-        width: auto;
-        height: 500px;
+        min-height: 500px;
       }
     }
   `;
   document.head.appendChild(style);
 
-  const chatbot = document.createElement("div");
-  chatbot.id = "kingston-chatbot";
+  const section = document.createElement("section");
+  section.id = "kingston-chatbot-section";
 
-  chatbot.innerHTML = `
-    <div id="kingston-chatbot-header">
-      Ask Kingston MP3
-      <div id="kingston-chatbot-subtitle">Questions about interviews, submissions, music, and the platform</div>
-    </div>
-
-    <div id="kingston-chatbot-messages">
-      <div class="kingston-msg kingston-bot">
-        Hey! I’m the Kingston MP3 assistant. Ask me about interviews, submitting music, copyright basics, or how Kingston MP3 helps local artists.
+  section.innerHTML = `
+    <div id="kingston-chatbot-wrap">
+      <div id="kingston-chatbot-copy">
+        <small>Kingston MP3 Assistant</small>
+        <h2>Ask questions about Kingston MP3</h2>
+        <p>
+          Local artists can use this assistant to learn about interviews,
+          music submissions, copyright basics, and how Kingston MP3 helps
+          Kingston-area talent get discovered.
+        </p>
       </div>
-    </div>
 
-    <div id="kingston-chatbot-input-area">
-      <input id="kingston-chatbot-input" placeholder="Type your question..." />
-      <button id="kingston-chatbot-send">Send</button>
+      <div id="kingston-chatbot">
+        <div id="kingston-chatbot-header">
+          <h3>Ask Kingston MP3</h3>
+          <p>Questions about interviews, submissions, music, copyright basics, and the platform.</p>
+        </div>
+
+        <div id="kingston-chatbot-messages">
+          <div class="kingston-msg kingston-bot">
+            Hey! Ask me anything about Kingston MP3, interviews, submissions, copyright basics, or how the platform helps local artists.
+          </div>
+        </div>
+
+        <div id="kingston-chatbot-input-area">
+          <input id="kingston-chatbot-input" placeholder="Type your question..." />
+          <button id="kingston-chatbot-send">Send</button>
+        </div>
+      </div>
     </div>
   `;
 
-  document.body.appendChild(chatbot);
+  const target =
+    document.querySelector("main") ||
+    document.querySelector(".entry-content") ||
+    document.body;
+
+  const secondSection = target.querySelectorAll("section")[1];
+
+  if (secondSection) {
+    secondSection.parentNode.insertBefore(section, secondSection);
+  } else {
+    target.appendChild(section);
+  }
 
   const messages = document.getElementById("kingston-chatbot-messages");
   const input = document.getElementById("kingston-chatbot-input");
@@ -173,8 +243,6 @@
   sendBtn.addEventListener("click", sendMessage);
 
   input.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-      sendMessage();
-    }
+    if (e.key === "Enter") sendMessage();
   });
 })();
