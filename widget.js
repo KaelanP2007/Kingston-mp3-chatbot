@@ -4,129 +4,132 @@
   const style = document.createElement("style");
   style.textContent = `
     #kmp3-ai-center {
-      max-width: 1180px;
-      margin: 70px auto;
-      padding: 0 24px;
-      font-family: inherit;
-      box-sizing: border-box;
+      max-width: 1180px !important;
+      margin: 60px auto !important;
+      padding: 0 24px !important;
+      font-family: Arial, sans-serif !important;
+      box-sizing: border-box !important;
     }
 
     #kmp3-card {
-      background: linear-gradient(135deg, #050505, #111);
-      border-radius: 28px;
-      padding: 48px;
-      border: 1px solid rgba(215,169,79,0.35);
-      box-shadow: 0 25px 70px rgba(0,0,0,0.22);
+      background: #080808 !important;
+      border-radius: 28px !important;
+      padding: 48px !important;
+      border: 1px solid rgba(215,169,79,0.45) !important;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.25) !important;
+      color: #ffffff !important;
     }
 
     #kmp3-card small {
-      color: #d7a94f;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: 800;
-      display: block;
-      margin-bottom: 14px;
+      color: #d7a94f !important;
+      text-transform: uppercase !important;
+      letter-spacing: 2px !important;
+      font-weight: 800 !important;
+      display: block !important;
+      margin-bottom: 14px !important;
+      font-size: 13px !important;
     }
 
     #kmp3-card h2 {
-      color: #fff;
-      font-size: 46px;
-      line-height: 1.05;
-      margin: 0 0 16px;
+      color: #ffffff !important;
+      font-size: 46px !important;
+      line-height: 1.05 !important;
+      margin: 0 0 16px !important;
+      font-weight: 800 !important;
     }
 
     #kmp3-card p {
-      color: rgba(255,255,255,0.75);
-      line-height: 1.7;
-      max-width: 760px;
-      margin: 0 0 28px;
-      font-size: 16px;
+      color: rgba(255,255,255,0.78) !important;
+      line-height: 1.7 !important;
+      max-width: 760px !important;
+      margin: 0 0 28px !important;
+      font-size: 16px !important;
     }
 
     #kmp3-search {
-      display: flex;
-      gap: 12px;
-      max-width: 850px;
+      display: flex !important;
+      gap: 12px !important;
+      max-width: 850px !important;
+      margin-bottom: 22px !important;
     }
 
     #kmp3-input {
-      flex: 1;
-      padding: 17px 18px;
-      border-radius: 14px;
-      border: 1px solid rgba(215,169,79,0.35);
-      background: rgba(255,255,255,0.07);
-      color: white;
-      font-size: 16px;
-      outline: none;
-      box-sizing: border-box;
+      flex: 1 !important;
+      width: 100% !important;
+      padding: 17px 18px !important;
+      border-radius: 14px !important;
+      border: 1px solid rgba(215,169,79,0.5) !important;
+      background: #161616 !important;
+      color: #ffffff !important;
+      font-size: 16px !important;
+      outline: none !important;
+      box-sizing: border-box !important;
+      min-height: 56px !important;
     }
 
     #kmp3-input::placeholder {
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.65) !important;
     }
 
     #kmp3-button {
-      background: #d7a94f;
-      border: none;
-      color: #050505;
-      font-weight: 900;
-      padding: 0 32px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-size: 15px;
+      background: #d7a94f !important;
+      border: none !important;
+      color: #050505 !important;
+      font-weight: 900 !important;
+      padding: 0 34px !important;
+      border-radius: 14px !important;
+      cursor: pointer !important;
+      font-size: 15px !important;
+      min-height: 56px !important;
     }
 
     #kmp3-questions {
-      margin-top: 22px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 10px !important;
+      margin-top: 8px !important;
     }
 
     .kmp3-question {
-      border: 1px solid rgba(215,169,79,0.45);
-      color: #d7a94f;
-      padding: 10px 15px;
-      border-radius: 999px;
-      cursor: pointer;
-      background: rgba(215,169,79,0.08);
-      font: inherit;
-      font-size: 14px;
-    }
-
-    .kmp3-question:hover {
-      background: rgba(215,169,79,0.16);
+      border: 1px solid rgba(215,169,79,0.55) !important;
+      color: #d7a94f !important;
+      padding: 10px 15px !important;
+      border-radius: 999px !important;
+      cursor: pointer !important;
+      background: rgba(215,169,79,0.1) !important;
+      font-family: Arial, sans-serif !important;
+      font-size: 14px !important;
     }
 
     #kmp3-answer {
-      margin-top: 28px;
+      margin-top: 28px !important;
       display: none;
-      max-width: 850px;
-      padding: 24px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.9);
-      line-height: 1.75;
-      font-size: 16px;
-      white-space: pre-wrap;
+      max-width: 850px !important;
+      padding: 24px !important;
+      border-radius: 18px !important;
+      background: #151515 !important;
+      border: 1px solid rgba(255,255,255,0.12) !important;
+      color: #ffffff !important;
+      line-height: 1.75 !important;
+      font-size: 16px !important;
+      white-space: pre-wrap !important;
     }
 
     @media (max-width: 768px) {
       #kmp3-card {
-        padding: 32px 22px;
+        padding: 32px 22px !important;
       }
 
       #kmp3-card h2 {
-        font-size: 34px;
+        font-size: 34px !important;
       }
 
       #kmp3-search {
-        flex-direction: column;
+        flex-direction: column !important;
       }
 
       #kmp3-button {
-        height: 54px;
+        height: 54px !important;
       }
     }
   `;
@@ -146,15 +149,15 @@
       </p>
 
       <div id="kmp3-search">
-        <input id="kmp3-input" placeholder="Ask a question..." />
-        <button id="kmp3-button">Ask</button>
+        <input id="kmp3-input" type="text" placeholder="Ask a question..." />
+        <button id="kmp3-button" type="button">Ask</button>
       </div>
 
       <div id="kmp3-questions">
-        <button class="kmp3-question">How do I get interviewed?</button>
-        <button class="kmp3-question">How do I submit music?</button>
-        <button class="kmp3-question">What is Kingston MP3?</button>
-        <button class="kmp3-question">What can Kingston MP3 do for artists?</button>
+        <button type="button" class="kmp3-question">How do I get interviewed?</button>
+        <button type="button" class="kmp3-question">How do I submit music?</button>
+        <button type="button" class="kmp3-question">What is Kingston MP3?</button>
+        <button type="button" class="kmp3-question">What can Kingston MP3 do for artists?</button>
       </div>
 
       <div id="kmp3-answer"></div>
