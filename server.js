@@ -4,40 +4,28 @@ import OpenAI from "openai";
 import fs from "fs";
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static("."));
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
-const knowledge = JSON.parse(fs.readFileSync("./knowledge.json", "utf8"));
+let knowledgeText = "";
 
-function searchKnowledge(message) {
-  const words = message.toLowerCase().split(/\W+/).filter(Boolean);
-
-  const scored = knowledge.map((item) => {
-    const text = `${item.category} ${item.question} ${item.answer}`.toLowerCase();
-    let score = 0;
-
-    for (const word of words) {
-      if (text.includes(word)) score++;
-    }
-
-    return { ...item, score };
-  });
-
-  return scored
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 5)
-    .map((item) => `Q: ${item.question}\nA: ${item.answer}`)
-    .join("\n\n");
+try {
+  const knowledgeRaw = fs.readFileSync("./knowledge.json", "utf8");
+  knowledgeText = JSON.stringify(JSON.parse(knowledgeRaw), null, 2);
+} catch (error) {
+  console.error("Could not load knowledge.json:", error);
+  knowledgeText = "No Kingston MP3 knowledge base has been loaded yet.";
 }
 
 app.get("/", (req, res) => {
-  res.send("Kingston MP3 Chatbot backend is online.");
+  res.send("Chatbot backend is online");
 });
 
 app.post("/chat", async (req, res) => {
@@ -45,46 +33,71 @@ app.post("/chat", async (req, res) => {
     const userMessage = req.body.message;
 
     if (!userMessage) {
-      return res.status(400).json({ error: "Message is required." });
+      return res.status(400).json({
+        error: "No message provided",
+      });
     }
 
-    const relevantKnowledge = searchKnowledge(userMessage);
+    const systemPrompt = `
+You are the Kingston MP3 website assistant.
 
-    const response = await client.responses.create({
-      model: "gpt-5.4-mini",
-      input: `
-You are the Kingston MP3 Artist Assistant.
+Your job is to give helpful information to local artists about Kingston MP3.
 
-Your job:
-- Help local artists understand Kingston MP3.
-- Answer questions about interviews, music submissions, promotion, copyright basics, and how the website can help them.
-- Prioritize the provided Kingston MP3 knowledge.
-- Do not invent official Kingston MP3 policies.
-- For legal, copyright disputes, contracts, or unclear Kingston MP3 policies, explain generally and recommend contacting the Kingston MP3 team.
-- If an artist wants to be interviewed or featured, collect: name, artist name, email, phone, genre, music link, and social media link.
-- Keep answers friendly, clear, and short.
+You can answer questions about:
+- What Kingston MP3 is
+- How interviews work
+- How music submissions work
+- Copyright basics
+- How Kingston MP3 can help local artists
+- General platform information
 
-Relevant Kingston MP3 knowledge:
-${relevantKnowledge || "No matching Kingston MP3 knowledge found."}
+Important rules:
+- Do NOT book interviews.
+- Do NOT collect personal details.
+- Do NOT ask for name, phone number, email, music links, or social media links.
+- Do NOT say "send me your details."
+- Do NOT act like a form or lead collector.
+- Only give informational answers.
+- If the user asks how to get interviewed, explain the process based on the knowledge base.
+- If the exact information is missing, say Kingston MP3 has not provided that detail yet.
+- Keep answers short, clear, and friendly.
+- Never make up official Kingston MP3 policies.
+- Never give legal advice. For copyright questions, give basic general information only.
 
-User question:
-${userMessage}
-`
+Use only this Kingston MP3 knowledge base:
+${knowledgeText}
+`;
+
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4.1-mini",
+      messages: [
+        {
+          role: "system",
+          content: systemPrompt,
+        },
+        {
+          role: "user",
+          content: userMessage,
+        },
+      ],
+      temperature: 0.3,
+      max_tokens: 350,
     });
 
-    res.json({
-      reply: response.output_text || "Sorry, I couldn't generate a response."
-    });
+    const reply =
+      completion.choices[0]?.message?.content ||
+      "Sorry, I could not generate a response.";
+
+    res.json({ reply });
   } catch (error) {
     console.error("Chat error:", error);
+
     res.status(500).json({
-      reply: "Sorry, the Kingston MP3 assistant is having trouble right now."
+      error: "Something went wrong with the chatbot.",
     });
   }
 });
 
-const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
-  console.log(`Kingston MP3 chatbot running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
