@@ -1,0 +1,27 @@
+[
+  {
+    "category": "About",
+    "question": "What is Kingston MP3?",
+    "answer": "Kingston MP3 is a local music discovery archive connected to KingstonLinks. It highlights Kingston-area music history, local artists, interviews, and community talent."
+  },
+  {
+    "category": "Interviews",
+    "question": "How do I get interviewed?",
+    "answer": "Artists interested in being interviewed can contact the Kingston MP3 team. The chatbot should collect the artist's name, artist name, email, genre, music links, and social media links so the team can review the request."
+  },
+  {
+    "category": "Submissions",
+    "question": "How do I submit my music?",
+    "answer": "Artists can submit music links such as Spotify, YouTube, SoundCloud, Bandcamp, or a personal website. The Kingston MP3 team can review the submission and follow up."
+  },
+  {
+    "category": "Copyright",
+    "question": "Do I keep ownership of my music?",
+    "answer": "In general, artists keep ownership of their original music unless they sign an agreement saying otherwise. For Kingston MP3's official copyright or submission policy, the artist should contact the Kingston MP3 team directly."
+  },
+  {
+    "category": "Contact",
+    "question": "Who do I contact?",
+    "answer": "The chatbot should collect the visitor's contact details and send them to the Kingston MP3 team for follow-up."
+  }
+]
