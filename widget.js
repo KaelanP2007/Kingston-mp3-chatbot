@@ -1,277 +1,204 @@
 (function () {
-  const API_URL = "https://kingston-mp3-chatbot.onrender.com/chat";
+const API_URL = "https://kingston-mp3-chatbot.onrender.com/chat";
 
-  const style = document.createElement("style");
-  style.innerHTML = `
-    #kingston-chatbot-section {
-      width: 100%;
-      padding: 80px 24px;
-      background:
-        linear-gradient(180deg, #030303 0%, #090909 55%, #030303 100%);
-      color: white;
-      font-family: inherit;
-      box-sizing: border-box;
-    }
+const style = document.createElement("style");
+style.innerHTML = `
+#kmp3-ai-center{
+padding:80px 30px;
+background:transparent;
+color:#fff;
+max-width:1100px;
+margin:0 auto;
+font-family:inherit;
+}
 
-    #kingston-chatbot-wrap {
-      max-width: 1180px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 56px;
-      align-items: center;
-    }
+#kmp3-header{
+text-align:center;
+margin-bottom:40px;
+}
 
-    #kingston-chatbot-copy {
-      max-width: 470px;
-    }
+#kmp3-header small{
+color:#d7a94f;
+text-transform:uppercase;
+letter-spacing:2px;
+font-weight:700;
+}
 
-    #kingston-chatbot-copy small {
-      display: block;
-      color: #d7a94f;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
+#kmp3-header h2{
+font-size:54px;
+line-height:1.05;
+margin:15px 0;
+color:white;
+}
 
-    #kingston-chatbot-copy h2 {
-      font-size: clamp(34px, 4vw, 54px);
-      line-height: 1.04;
-      margin: 0 0 20px;
-      color: #fff;
-      letter-spacing: -0.04em;
-    }
+#kmp3-header p{
+max-width:700px;
+margin:auto;
+color:rgba(255,255,255,.75);
+line-height:1.8;
+}
 
-    #kingston-chatbot-copy p {
-      color: rgba(255,255,255,0.78);
-      font-size: 17px;
-      line-height: 1.75;
-      margin: 0;
-    }
+#kmp3-search{
+display:flex;
+gap:10px;
+margin-top:35px;
+}
 
-    #kingston-chatbot {
-      width: 100%;
-      max-width: 620px;
-      background: rgba(8,8,8,0.92);
-      border: 1px solid rgba(215,169,79,0.42);
-      border-radius: 20px;
-      box-shadow: 0 26px 70px rgba(0,0,0,0.55);
-      overflow: hidden;
-      min-height: 440px;
-      display: flex;
-      flex-direction: column;
-    }
+#kmp3-input{
+flex:1;
+padding:18px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,.15);
+background:rgba(255,255,255,.04);
+color:white;
+font-size:16px;
+}
 
-    #kingston-chatbot-header {
-      padding: 22px 24px;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.045), rgba(255,255,255,0.01));
-      border-bottom: 1px solid rgba(215,169,79,0.25);
-    }
+#kmp3-button{
+background:#d7a94f;
+border:none;
+color:#000;
+font-weight:700;
+padding:0 30px;
+border-radius:12px;
+cursor:pointer;
+}
 
-    #kingston-chatbot-header h3 {
-      margin: 0;
-      font-size: 24px;
-      line-height: 1.15;
-      color: #fff;
-      letter-spacing: -0.02em;
-    }
+#kmp3-questions{
+margin-top:25px;
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
 
-    #kingston-chatbot-header p {
-      margin: 8px 0 0;
-      color: rgba(255,255,255,0.7);
-      font-size: 14px;
-      line-height: 1.45;
-    }
+.kmp3-question{
+border:1px solid rgba(215,169,79,.35);
+color:#d7a94f;
+padding:10px 15px;
+border-radius:999px;
+cursor:pointer;
+transition:.2s;
+}
 
-    #kingston-chatbot-messages {
-      flex: 1;
-      padding: 22px;
-      overflow-y: auto;
-      background:
-        radial-gradient(circle at top right, rgba(215,169,79,0.09), transparent 32%),
-        #080808;
-      font-size: 15px;
-      line-height: 1.55;
-    }
+.kmp3-question:hover{
+background:rgba(215,169,79,.1);
+}
 
-    .kingston-msg {
-      margin-bottom: 13px;
-      padding: 13px 15px;
-      border-radius: 14px;
-      max-width: 82%;
-      white-space: pre-wrap;
-      font-size: 15px;
-      line-height: 1.55;
-      text-align: left;
-    }
+#kmp3-answer{
+margin-top:35px;
+display:none;
+padding:30px;
+border-radius:18px;
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.08);
+color:white;
+line-height:1.8;
+font-size:16px;
+}
 
-    .kingston-user {
-      background: #d7a94f;
-      color: #080808;
-      margin-left: auto;
-      font-weight: 700;
-    }
+@media(max-width:768px){
+#kmp3-header h2{
+font-size:38px;
+}
 
-    .kingston-bot {
-      background: rgba(255,255,255,0.075);
-      color: rgba(255,255,255,0.9);
-      border: 1px solid rgba(255,255,255,0.08);
-      margin-right: auto;
-    }
+```
+#kmp3-search{
+  flex-direction:column;
+}
 
-    #kingston-chatbot-input-area {
-      display: flex;
-      gap: 10px;
-      padding: 14px;
-      background: #060606;
-      border-top: 1px solid rgba(215,169,79,0.22);
-    }
+#kmp3-button{
+  height:55px;
+}
+```
 
-    #kingston-chatbot-input {
-      flex: 1;
-      min-width: 0;
-      padding: 13px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(215,169,79,0.28);
-      background: rgba(255,255,255,0.055);
-      color: white;
-      outline: none;
-      font-size: 15px;
-      line-height: 1.2;
-      box-sizing: border-box;
-    }
+}
+`;
+document.head.appendChild(style);
 
-    #kingston-chatbot-input::placeholder {
-      color: rgba(255,255,255,0.42);
-    }
+const container = document.createElement("section");
+container.id = "kmp3-ai-center";
 
-    #kingston-chatbot-send {
-      background: #d7a94f;
-      color: #080808;
-      border: none;
-      border-radius: 12px;
-      padding: 0 22px;
-      cursor: pointer;
-      font-weight: 900;
-      font-size: 15px;
-      min-width: 82px;
-    }
+container.innerHTML = ` <div id="kmp3-header"> <small>Kingston MP3 Assistant</small> <h2>Ask Anything About Kingston MP3</h2> <p>
+Learn about interviews, submissions, local music history,
+copyright basics, and how Kingston MP3 supported local artists. </p>
 
-    #kingston-chatbot-send:hover {
-      background: #efc064;
-    }
+```
+  <div id="kmp3-search">
+    <input id="kmp3-input" placeholder="Ask a question..." />
+    <button id="kmp3-button">Ask</button>
+  </div>
 
-    @media (max-width: 900px) {
-      #kingston-chatbot-section {
-        padding: 56px 18px;
-      }
+  <div id="kmp3-questions">
+    <div class="kmp3-question">How do I get interviewed?</div>
+    <div class="kmp3-question">How do I submit music?</div>
+    <div class="kmp3-question">What is Kingston MP3?</div>
+    <div class="kmp3-question">What can Kingston MP3 do for artists?</div>
+  </div>
 
-      #kingston-chatbot-wrap {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
+  <div id="kmp3-answer"></div>
+</div>
+```
 
-      #kingston-chatbot-copy {
-        max-width: 100%;
-      }
+`;
 
-      #kingston-chatbot {
-        max-width: 100%;
-        min-height: 430px;
-      }
-    }
-  `;
-  document.head.appendChild(style);
+const target =
+document.querySelector("main") ||
+document.querySelector(".entry-content") ||
+document.body;
 
-  const section = document.createElement("section");
-  section.id = "kingston-chatbot-section";
+const sections = target.querySelectorAll("section");
 
-  section.innerHTML = `
-    <div id="kingston-chatbot-wrap">
-      <div id="kingston-chatbot-copy">
-        <small>Kingston MP3 Assistant</small>
-        <h2>Ask about the project, the music, and the story.</h2>
-        <p>
-          Use the Kingston MP3 assistant to learn how the platform works,
-          what it offers local artists, and what information is currently
-          available about interviews, submissions, and copyright basics.
-        </p>
-      </div>
+if (sections[1]) {
+sections[1].parentNode.insertBefore(container, sections[1]);
+} else {
+target.appendChild(container);
+}
 
-      <div id="kingston-chatbot">
-        <div id="kingston-chatbot-header">
-          <h3>Ask Kingston MP3</h3>
-          <p>Questions about interviews, submissions, music, copyright basics, and the platform.</p>
-        </div>
+const input = document.getElementById("kmp3-input");
+const button = document.getElementById("kmp3-button");
+const answer = document.getElementById("kmp3-answer");
 
-        <div id="kingston-chatbot-messages">
-          <div class="kingston-msg kingston-bot">
-            Hey! Ask me anything about Kingston MP3, interviews, submissions, copyright basics, or how the platform helps local artists.
-          </div>
-        </div>
+async function askQuestion(question) {
+answer.style.display = "block";
+answer.innerHTML = "Thinking...";
 
-        <div id="kingston-chatbot-input-area">
-          <input id="kingston-chatbot-input" placeholder="Type your question..." />
-          <button id="kingston-chatbot-send">Send</button>
-        </div>
-      </div>
-    </div>
-  `;
-
-  const target =
-    document.querySelector("main") ||
-    document.querySelector(".entry-content") ||
-    document.body;
-
-  const sections = target.querySelectorAll("section");
-
-  if (sections[1]) {
-    sections[1].parentNode.insertBefore(section, sections[1]);
-  } else {
-    target.appendChild(section);
-  }
-
-  const messages = document.getElementById("kingston-chatbot-messages");
-  const input = document.getElementById("kingston-chatbot-input");
-  const sendBtn = document.getElementById("kingston-chatbot-send");
-
-  function addMessage(text, sender) {
-    const msg = document.createElement("div");
-    msg.className = `kingston-msg kingston-${sender}`;
-    msg.textContent = text;
-    messages.appendChild(msg);
-    messages.scrollTop = messages.scrollHeight;
-  }
-
-  async function sendMessage() {
-    const message = input.value.trim();
-    if (!message) return;
-
-    addMessage(message, "user");
-    input.value = "";
-
-    addMessage("Kingston MP3 is typing...", "bot");
-    const typingMsg = messages.lastChild;
-
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message })
-      });
-
-      const data = await response.json();
-      typingMsg.textContent = data.reply || "Sorry, I could not answer that yet.";
-    } catch (error) {
-      typingMsg.textContent = "Sorry, something went wrong. Please try again.";
-    }
-  }
-
-  sendBtn.addEventListener("click", sendMessage);
-  input.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") sendMessage();
+```
+try {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type":"application/json"
+    },
+    body: JSON.stringify({
+      message: question
+    })
   });
+
+  const data = await response.json();
+  answer.innerHTML = data.reply;
+} catch (e) {
+  answer.innerHTML = "Sorry, something went wrong.";
+}
+```
+
+}
+
+button.addEventListener("click", () => {
+if (!input.value.trim()) return;
+askQuestion(input.value);
+});
+
+input.addEventListener("keydown", (e) => {
+if (e.key === "Enter") {
+if (!input.value.trim()) return;
+askQuestion(input.value);
+}
+});
+
+document.querySelectorAll(".kmp3-question").forEach(btn => {
+btn.addEventListener("click", () => {
+input.value = btn.innerText;
+askQuestion(btn.innerText);
+});
+});
 })();
