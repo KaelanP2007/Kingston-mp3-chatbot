@@ -101,6 +101,10 @@
       font-size: 14px !important;
     }
 
+    .kmp3-question:hover {
+      background: rgba(215,169,79,0.18) !important;
+    }
+
     #kmp3-answer {
       margin-top: 28px !important;
       display: none;
@@ -141,11 +145,10 @@
 
   container.innerHTML = `
     <div id="kmp3-card">
-      <small>Kingston MP3 Assistant</small>
-      <h2>Ask Anything About Kingston MP3</h2>
+      <small>Discover • Explore • Connect</small>
+      <h2>Local Talent Discovery</h2>
       <p>
-        Learn about interviews, submissions, local music history,
-        copyright basics, and how Kingston MP3 supported local artists.
+        Explore artists, interviews, music history, and stories from Kingston's music community.
       </p>
 
       <div id="kmp3-search">
